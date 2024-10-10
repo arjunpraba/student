@@ -1,8 +1,6 @@
 # Use an official Maven image to build the app12
 FROM maven:3.8.6-openjdk-17 AS build
 
-# Set the working directory inside the container
-WORKDIR /student
 
 # Copy the pom.xml and source code into the container
 COPY pom.xml .
