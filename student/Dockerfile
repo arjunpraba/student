@@ -2,7 +2,7 @@
 FROM maven:3.8.6-openjdk-17 AS build
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /student
 
 # Copy the pom.xml and source code into the container
 COPY pom.xml .
@@ -15,13 +15,13 @@ RUN mvn clean install
 FROM openjdk:17-jdk-slim
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /student
 
 # Copy the built Spring Boot app from the Maven build image
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /student/target/*.jar student.jar
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
 # Command to run the Spring Boot app
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "student.jar"]
