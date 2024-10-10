@@ -11,7 +11,7 @@ public class StudentEntity {
     private Long id;
 
     private String name;
-
+//hello
     private String email;
 
     @Column(name = "mobile_no")
