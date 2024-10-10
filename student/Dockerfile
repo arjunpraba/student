@@ -14,7 +14,7 @@ FROM openjdk:17-jdk-slim
 
 
 # Copy the built Spring Boot app from the Maven build image
-COPY --from=build /student/target/*.jar student.jar
+COPY --from=build /target/*.jar student.jar
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
