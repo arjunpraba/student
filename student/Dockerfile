@@ -12,8 +12,6 @@ RUN mvn clean install
 # Use an official OpenJDK runtime as a base image
 FROM openjdk:17-jdk-slim
 
-# Set the working directory inside the container
-WORKDIR /student
 
 # Copy the built Spring Boot app from the Maven build image
 COPY --from=build /student/target/*.jar student.jar
