@@ -1,23 +1,24 @@
-# Use an official Maven image to build the app12
-FROM maven:3.8.6-openjdk-17 AS build
+# Use an official Maven image to build the app
+FROM maven:3.8.6-openjdk-17-slim AS build
 
+# Set the working directory
+WORKDIR /app
 
-# Copy the pom.xml and source code into the container
+# Copy the pom.xml and source code
 COPY pom.xml .
 COPY src ./src
 
-# Build the Spring Boot app
-RUN mvn clean install
+# Build the application
+RUN mvn clean package -DskipTests
 
-# Use an official OpenJDK runtime as a base image
+# Use a lightweight image for the final app
 FROM openjdk:17-jdk-slim
 
+# Set the working directory
+WORKDIR /app
 
-# Copy the built Spring Boot app from the Maven build image
-COPY --from=build /target/*.jar student.jar
+# Copy the jar file from the build stage
+COPY --from=build /app/target/your-application-name.jar app.jar
 
-# Expose port 8080 to the outside world
-EXPOSE 8080
-
-# Command to run the Spring Boot app
-CMD ["java", "-jar", "student.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
